@@ -1,13 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
-    <h1>Welcome to the page</h1>
-    <button onclick="connect()">Click Me</button>
-</body>
-<script src="./bundle.js" ></script>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <h1>Guide</h1>
+    <h3>Instruction for using the Guide</h3>
+
+    <div class="container">
+      <div class="left">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" />
+
+        <label for="amount">Amount:</label>
+        <input type="text" id="amount" name="amount" />
+      </div>
+
+      <div class="right">
+        <h4>Selected Address:</h4>
+        <label for="addresses">Addresses:</label>
+        <select id="addresses">
+          <!-- Options will be inserted dynamically -->
+        </select>
+
+        <div class="info-box">
+          <div class="header">Name</div>
+          <div class="header">Amount</div>
+          <div class="header">Address</div>
+
+          <!-- Example rows for dynamic data -->
+          <div class="name"><!-- Placeholder for Name data --></div>
+          <div class="amount"><!-- Placeholder for Amount data --></div>
+          <div class="address"><!-- Placeholder for Address data --></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="buttons">
+      <div class="buttons-left">
+        <button>Contract</button>
+        <button>Perform</button>
+      </div>
+      <div class="buttons-right">
+        <button>Submit</button>
+        <button>View</button>
+      </div>
+    </div>
+  </body>
+  <script src="./bundle.js"></script>
 </html>

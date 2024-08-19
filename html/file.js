@@ -20,6 +20,7 @@ let selectedAddress;
 
 //appending the addresses to drop down list done
 //when selected it should be selected as default done
+// Test the smart contract
 //deploying the contract
 //listening to events and logs
 
@@ -43,7 +44,7 @@ const main = async () => {
     console.log("-------------------");
   }
 
-  
+
 };
 
 main();

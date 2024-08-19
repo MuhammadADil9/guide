@@ -15,7 +15,6 @@ error TransactionFailed(string message);
 error UserDoesNotExist(string message);
 
 contract fund {
-
     modifier onlyOwner() {
         if (msg.sender != owner) {
             revert notOwner(owner, msg.sender);
@@ -25,13 +24,12 @@ contract fund {
 
     //owner address
     address private immutable owner;
-
+    uint256 public counter;
     //struct for the receivers
     struct Receivers {
         string ReceiverName;
         uint256 RequiredAmount;
     }
-
 
     // events
     event Borrowers(
@@ -50,6 +48,7 @@ contract fund {
     // will assigen the deployer as the contract owner.
     constructor() {
         owner = msg.sender;
+        counter = 1;
     }
 
     //submitting the request for receiving the funds
@@ -64,13 +63,12 @@ contract fund {
 
         //  mapping the struct to the address
         BorrowerMapping[msg.sender] = receiverStruct;
-
+        counter++;
         //  emitting the event
         emit Borrowers(name, amount, msg.sender);
     }
 
     function transfer(address receiver) public payable onlyOwner {
-
         Receivers memory PersonToReceive = BorrowerMapping[receiver];
         uint256 amountToSend = PersonToReceive.RequiredAmount;
 
@@ -93,11 +91,22 @@ contract fund {
         return address(this).balance;
     }
 
-    function getUser(address user) public view returns (string memory name) {
+    function getUser(
+        address user
+    )
+        public
+        view
+        returns (string memory name, uint256 amount, uint256 UserBalance)
+    {
         Receivers memory PersonToReceive = BorrowerMapping[user];
-        if(bytes(PersonToReceive.ReceiverName).length == 0){
+        if (bytes(PersonToReceive.ReceiverName).length == 0) {
             revert UserDoesNotExist("User does not exist");
         }
-        return PersonToReceive.ReceiverName;
+        uint256 userBalance = user.balance;
+        return (
+            PersonToReceive.ReceiverName,
+            PersonToReceive.RequiredAmount,
+            userBalance
+        );
     }
 }
